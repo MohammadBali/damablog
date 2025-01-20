@@ -2,6 +2,7 @@ import express from "express";
 import dbConnect from "./db/mongoose";
 import userRouter from "./routers/User";
 import blogRouter from "./routers/Blog";
+import {setupSwagger} from "./swagger";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,6 +10,10 @@ const port = process.env.PORT || 3000;
 
 // Use JSON middleware
 app.use(express.json());
+
+
+//Set up Swagger
+setupSwagger(app);
 
 app.use(userRouter);
 app.use(blogRouter);

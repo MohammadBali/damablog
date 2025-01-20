@@ -80,8 +80,8 @@ This project is a RESTful API for a blog application built using **Node.js**, **
     - Add the following variables:
       ```env
       PORT=3000
-      MONGO_URI=<your-mongodb-connection-string>
-      JWT_SECRET=<your-jwt-secret>
+      MONGODB_URI=<your-mongodb-connection-string>
+      SIGN_KEY=<your-jwt-secret>
       ```
 
 ### Running the Application

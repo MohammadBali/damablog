@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "7adc3cdb-e404-44b6-91ca-fea5033cc8c2",
+		"name": "DamaTag",
+		"description": "Users:\n\nNormal Account:\n\n[john@test.com](https://mailto:john@test.com)\n\n123456ss\n\n---\n\n---\n\nAdmin Account:\n\nkafka@test.com\n\npoAb123\n\n---\n\n---\n\n---\n\n---",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26564924"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Kafka Admin\",\r\n    \"email\":\"kafka@test.com\",\r\n    \"password\":\"poAb123\",\r\n    \"role\":\"manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/signup",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"kafka@test.com\",\r\n    \"password\":\"poAb123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Get All Blogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/blog/blogs",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"blog",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"My First Blog!\",\r\n    \"description\":\"This is the desc of my blog.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/blog/blogs",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"blog",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"New Title32!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/blog/blogs/678e82323d1aebec1e9a69fe",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"blog",
+								"blogs",
+								"678e82323d1aebec1e9a69fe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Blog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/blog/blogs/678e82323d1aebec1e9a69fe",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"blog",
+								"blogs",
+								"678e82323d1aebec1e9a69fe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "userToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhlN2QwZTA5ODAwN2FlZDk0NmI3NTQiLCJpYXQiOjE3MzczOTEzNzR9.Df2bkK6E7OahSk_6MwIK2eV6Xx1Pd7pTwFKvIv34Wic",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhlN2RkNTA5ODAwN2FlZDk0NmI3NWMiLCJpYXQiOjE3MzczOTI4NzR9.xrh6H42DwYAMUVlzeUwgLfWbwpk5Pc-gPbXkuF1GoKU",
+			"type": "string"
+		}
+	]
+}

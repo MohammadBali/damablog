@@ -15,6 +15,7 @@ app.use(express.json());
 //Set up Swagger
 setupSwagger(app);
 
+//Use The Routers
 app.use(userRouter);
 app.use(blogRouter);
 

@@ -107,5 +107,21 @@ http://localhost:3000/api-docs
 - Verify authentication and role-based access control by creating users with different roles.
 - a Postman exported file is available too
 
+## Project Architecture Explanation
+This project is designed to demonstrate a basic RESTful API built with Node.js, Express, and MongoDB, adhering to widely recognized best practices. While the project is structured with routers and models, the functionality is implemented in a straightforward manner without explicit service and controller layers. This decision was made to focus on simplicity and clarity, aligning with the requirements of this assignment.
+
+- Key Architectural Notes:
+1. Separation of Concerns:
+    - The routers handle incoming HTTP requests and responses.
+    - The models encapsulate data structure and database interaction logic.
+      
+2. Best Practice Alignment:
+    - Authentication middleware is included to protect routes.
+    - Mongoose schemas are used for data validation.
+    - Async/await is utilized for efficient asynchronous operations.
+
+3. Simplification:
+
+    - A full-fledged service layer (business logic) and controller layer (request-handling logic) were not explicitly implemented in this project to maintain simplicity. However, the structure can easily be extended to include these layers.
 
 

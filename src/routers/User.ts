@@ -1,6 +1,7 @@
 import express, {Request, Response} from 'express';
 import {User} from "../models/User";
-
+import UserService from "../services/User";
+import {AppError} from "../shared/helper/errors";
 const router = express.Router();
 
 //Add a New User
@@ -63,25 +64,16 @@ router.post('/auth/signup', async (req:Request, res:Response):Promise<any> => {
 
     try
     {
-        const user = new User(req.body);
-
-        await user.save();
-
-        //If User Couldn't be created
-        if(!user)
-        {
-            return res.status(404).send("User Could not be created!");
-        }
-
-        //Generate a Token for this User and send it
-        // @ts-ignore
-        const token = await user.generateAuthToken();
-
-        return res.status(201).send({user, token, success:1});
+        const result = await UserService.signup(req);
+        return res.status(201).send(result);
     }
 
     catch (e:any)
     {
+        if (e instanceof AppError)
+        {
+            return res.status(e.statusCode).send({ error: e.message });
+        }
         return res.status(500).send({error:'Error While Adding A User...', message:e.message});
     }
 });
@@ -146,23 +138,18 @@ router.post('/auth/login', async (req:Request,res:Response):Promise<any>=>{
 
     try
     {
-        if(!req.body.email || !req.body.password)
-        {
-            return res.status(400).send({error:'Missing Email or Password Parameter'});
-        }
+        const result = await UserService.login(req);
 
-        //Check if this email and password matches a current user
-        //@ts-ignore
-        const user= await User.findByCredentials(req.body.email,req.body.password);
-
-        //create a token
-        const token= await user.generateAuthToken();
-
-        return res.send({user,token, success:1});
+        return res.status(201).send(result);
     }
 
     catch (e:any)
     {
+        if (e instanceof AppError)
+        {
+            return res.status(e.statusCode).send({ error: e.message });
+        }
+
         return res.status(500).send({error:'Could not sign you in', message:e.message});
     }
 });
